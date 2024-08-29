@@ -1,0 +1,191 @@
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+form {
+  display: flex;
+}
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.searсh {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #cbcbcb;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* ТУТ ДЛЯ СОФТОВ */
+.user-soft-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.user-profile {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+
+.skill-category {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  background-color: rgb(255, 255, 255);
+  margin: 1rem;
+  color: rgb(0, 0, 0);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.skill-level {
+  background-color: blue;
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
+
+/* UserSoftPage.css */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 равные колонки */
+  gap: 20px; /* Расстояние между колонками */
+}
+
+.skill-category {
+  background-color: rgb(224, 219, 219); /* Опционально: стили для категории */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* SkillItem.css */
+.skill-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.skill-name {
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.skill-ratings {
+  display: flex;
+  gap: 10px;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.circleOther {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1da328;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
