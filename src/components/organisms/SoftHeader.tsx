@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../context/UserContext';
+import { useSelectedUser } from '../context/SelectedUserContext'; // Импортируйте контекст выбранного пользователя
 
 interface UserData {
   lastName: string;
@@ -9,7 +10,8 @@ interface UserData {
 }
 
 const SoftHeader: React.FC = () => {
-  const { userId } = useUser(); // Получаем userId из контекста
+  const { userId } = useUser(); // Получаем userId из контекста авторизованного пользователя
+  const { selectedUser } = useSelectedUser(); // Получаем выбранного пользователя из контекста
   const [userData, setUserData] = useState<UserData | null>(null); // Состояние для хранения данных пользователя
   const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
   const [error, setError] = useState<string | null>(null); // Состояние ошибки
@@ -17,8 +19,11 @@ const SoftHeader: React.FC = () => {
   useEffect(() => {
     // Функция для получения данных пользователя
     const fetchUserData = async () => {
+      // Определяем, какой ID использовать
+      const fetchUserId = selectedUser?.id || userId; // Если выбранный пользователь есть, используем его ID, иначе используем ID авторизованного пользователя
+
       try {
-        const response = await fetch(`http://localhost:8081/api/users/${userId}`);
+        const response = await fetch(`http://localhost:8081/api/users/${fetchUserId}`);
         if (!response.ok) {
           throw new Error('Ошибка при загрузке данных пользователя');
         }
@@ -31,10 +36,10 @@ const SoftHeader: React.FC = () => {
       }
     };
 
-    if (userId) {
-      fetchUserData(); // Выполняем запрос только если есть userId
+    if (selectedUser || userId) {
+      fetchUserData(); // Выполняем запрос, если есть выбранный пользователь или авторизованный пользователь
     }
-  }, [userId]);
+  }, [userId, selectedUser]);
 
   if (isLoading) {
     return <p>Загрузка...</p>; // Отображаем индикатор загрузки
@@ -50,9 +55,7 @@ const SoftHeader: React.FC = () => {
 
   return (
     <div>
-      <h2>Информация о пользователе</h2>
       <p>ФИО: {`${userData.lastName} ${userData.firstName} ${userData.middleName}`}</p>
-      <p>Электронная почта: {userData.email}</p>
     </div>
   );
 };

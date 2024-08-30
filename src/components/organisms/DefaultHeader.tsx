@@ -5,9 +5,15 @@ const DefaultHeader: React.FC = () => {
 
   return (
      <>
-     <div>
-        <ProfileButton></ProfileButton>
-        <Search></Search>
+     <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        width: '100%',  // Задаем ширину контейнера
+        padding: '10px' // Добавляем отступы, если нужно
+      }}>
+        <ProfileButton />
+        <Search />
       </div>
       </>
   );

@@ -4,9 +4,10 @@ import ProfilePage from './components/pages/ProfilePage';
 import UserInfoPage from './components/pages/UserInfoPage';
 import UserHardPage from './components/pages/UserHardPage';
 import UserSoftPage from './components/pages/UserSoftPage';
+import NotFoundPage from './components/pages/NotFoundPage'; // Импортируем страницу 404
 
-import { UserProvider } from './components/context/UserContext'; // Контекст для авторизованного пользователя
-import { SelectedUserProvider } from './components/context/SelectedUserContext'; // Контекст для выбранного пользователя
+import { UserProvider } from './components/context/UserContext';
+import { SelectedUserProvider } from './components/context/SelectedUserContext';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,9 @@ const App: React.FC = () => {
             <Route path="/userinfopage/:userId" element={<UserInfoPage />} /> 
             <Route path="/userhardpage" element={<UserHardPage />} />
             <Route path="/usersoftpage/:userId" element={<UserSoftPage />} />
+            
+            {/* Добавляем маршрут для страницы 404 */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>
       </SelectedUserProvider>

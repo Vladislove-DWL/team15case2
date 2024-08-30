@@ -8,7 +8,7 @@ const ProfileHeader: React.FC = () => {
       </div>
       <div style={styles.imageContainer}>
         <img
-          src="../../src/assets/логоТ1.png" // Замените на реальный URL изображения
+          src="../../src/assets/логоТ1.png" 
           alt="IT Specialist"
           style={styles.image}
         />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import DefaultHeader from "../organisms/DefaultHeader";
+// import DefaultHeader from "../organisms/DefaultHeader";
+import ProfileButton from '../atoms/ProfileButton';
 import { useUser } from '../context/UserContext';
 import { useParams } from 'react-router-dom'; // Импортируем useParams
 
@@ -88,12 +89,12 @@ const UserInfoPage: React.FC = () => {
 
   return (
     <div>
-      <DefaultHeader />
+      <ProfileButton></ProfileButton>
       <h1>Информация о пользователе</h1>
       {user && (
-        <div>
+        <div style={{backgroundColor: 'grey'}}>
           <p><strong>ID:</strong> {user.id}</p>
-          <p><strong>Бейдж:</strong> {user.badge}</p>
+          {/* <p><strong>Бейдж:</strong> {user.badge}</p> */}
           
           {isEditing && user.id === userId ? (
             <>
@@ -114,16 +115,15 @@ const UserInfoPage: React.FC = () => {
               <p><strong>Телефон:</strong> {user.phone}</p>
             </>
           )}
-          
-          {user.id === userId ? (
+        </div>
+      )}
+      {user.id === userId ? (
             <button onClick={isEditing ? handleSaveChanges : handleEditToggle}>
               {isEditing ? "Сохранить изменения" : "Редактировать"}
             </button>
           ) : (
             <p>Вы можете только просмотреть информацию о выбранном пользователе.</p>
           )}
-        </div>
-      )}
     </div>
   );
 };

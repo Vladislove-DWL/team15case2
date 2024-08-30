@@ -1,7 +1,14 @@
+// Импортируем необходимые библиотеки и контексты
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../context/UserContext';
 import { useParams } from 'react-router-dom';
+// import DefaultHeader from '../organisms/DefaultHeader';
+import ProfileButton from '../atoms/ProfileButton';
+import SoftHeader from '../organisms/SoftHeader';
+import SoftLegend from '../atoms/SoftLegend';
+// import './UserSoftPage.css'; // Импортируем стили
 
+// Определяем интерфейсы для типов данных
 interface SoftGradeResponse {
   workerId: number;
   competencyLevel: number;
@@ -181,8 +188,8 @@ const UserSoftPage: React.FC = () => {
 
   categories.forEach(([category, skills], index) => {
     columns[index % columnCount].push(
-      <div style={{border: '5px black solid'}} key={category}>
-        <h3 style={{color: 'red'}}>{category}</h3>
+      <div  key={category}>
+        <h2 style={{  backgroundColor: '#00A4DC', color: 'white' }}>{category}</h2>
         {skills.map(skill => {
           const currentResponse = skill.softGradeResponses.find(response => response.workerId === (isOwnPage ? userId : Number(paramUserId)));
           const currentRating = currentResponse ? currentResponse.competencyLevel : null;
@@ -190,8 +197,8 @@ const UserSoftPage: React.FC = () => {
           const thirdCircleRating = thirdCircleRatings[skill.softSkillId];
 
           return (
-            <div key={skill.softSkillId} style={{ marginBottom: '20px' }}>
-              <h4>{skill.competencyName}</h4>
+            <div key={skill.softSkillId} style={{ margin: '20px', border: '5px gray solid', padding: '10px'  }}>
+              {/* Используем flex для выравнивания в одну строку */}
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div
                   style={{
@@ -209,22 +216,7 @@ const UserSoftPage: React.FC = () => {
                 >
                   {currentRating}
                 </div>
-                {openDropdown[skill.softSkillId] && isOwnPage && (
-                  <div style={{ position: 'absolute', backgroundColor: 'white', border: '1px solid gray', borderRadius: '4px', marginTop: '10px' }}>
-                    {[-1, 0, 1, 2, 3].map(level => (
-                      <div
-                        key={level}
-                        style={{ padding: '5px', cursor: 'pointer' }}
-                        onClick={() => {
-                          handleRatingChange(skill.softSkillId, level);
-                          closeDropdown();
-                        }}
-                      >
-                        Оценка: {level}
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <span style={{ marginRight: '10px' }}>{skill.competencyName}</span>
                 <div
                   style={{
                     width: '40px',
@@ -257,6 +249,23 @@ const UserSoftPage: React.FC = () => {
                     {thirdCircleRating !== null ? thirdCircleRating : '+'}
                   </div>
                 )}
+                {/* Здесь также обработка дропдаунов для оценок */}
+                {openDropdown[skill.softSkillId] && isOwnPage && (
+                  <div style={{ position: 'absolute', backgroundColor: 'white', border: '1px solid gray', borderRadius: '4px', marginTop: '10px' }}>
+                    {[-1, 0, 1, 2, 3].map(level => (
+                      <div
+                        key={level}
+                        style={{ padding: '5px', cursor: 'pointer' }}
+                        onClick={() => {
+                          handleRatingChange(skill.softSkillId, level);
+                          closeDropdown();
+                        }}
+                      >
+                        Оценка: {level}
+                      </div>
+                    ))}
+                  </div>
+                )}
                 {openDropdown[skill.softSkillId] && !isOwnPage && (
                   <div style={{ position: 'absolute', backgroundColor: 'white', border: '1px solid gray', borderRadius: '4px', marginTop: '10px' }}>
                     {[-1, 0, 1, 2, 3].map(level => (
@@ -279,8 +288,12 @@ const UserSoftPage: React.FC = () => {
   });
 
   return (
+
     <div>
-      <h2>Софт-навыки</h2>
+        <ProfileButton></ProfileButton>
+      <h1>Soft Skills</h1>
+      <SoftHeader></SoftHeader>
+      <button onClick={handleSaveRatings}>Сохранить все изменения</button>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {columns.map((column, index) => (
           <div key={index} style={{ flex: 1, margin: '0 10px' }}>
@@ -288,7 +301,7 @@ const UserSoftPage: React.FC = () => {
           </div>
         ))}
       </div>
-      <button onClick={handleSaveRatings}>Сохранить все изменения</button>
+      <SoftLegend></SoftLegend>
     </div>
   );
 };

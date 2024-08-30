@@ -32,14 +32,14 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
   const validateFields = () => {
     const errors: { [key: string]: string } = {};
 
-    if (!firstName.trim()) errors.firstName = 'Поле должно быть заполнено';
-    if (!lastName.trim()) errors.lastName = 'Поле должно быть заполнено';
-    if (!middleName.trim()) errors.middleName = 'Поле должно быть заполнено';
-    if (!birthday) errors.birthday = 'Поле должно быть заполнено';
-    if (!city.trim()) errors.city = 'Поле должно быть заполнено';
-    if (!phone.trim()) errors.phone = 'Поле должно быть заполнено';
-    if (!email.trim()) errors.email = 'Поле должно быть заполнено';
-    if (!password.trim()) errors.password = 'Поле должно быть заполнено';
+    // if (!firstName.trim()) errors.firstName = 'Поле должно быть заполнено';
+    // if (!lastName.trim()) errors.lastName = 'Поле должно быть заполнено';
+    // if (!middleName.trim()) errors.middleName = 'Поле должно быть заполнено';
+    // if (!birthday) errors.birthday = 'Поле должно быть заполнено';
+    // if (!city.trim()) errors.city = 'Поле должно быть заполнено';
+    // if (!phone.trim()) errors.phone = 'Поле должно быть заполнено';
+    // if (!email.trim()) errors.email = 'Поле должно быть заполнено';
+    // if (!password.trim()) errors.password = 'Поле должно быть заполнено';
 
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
@@ -54,11 +54,11 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
     setError('');
     setEmailError('');
 
-    if (!validateFields()) return;
-    if (!validateEmail(email)) {
-      setEmailError('Неверный формат почты.');
-      return;
-    }
+    // if (!validateFields()) return;
+    // if (!validateEmail(email)) {
+    //   setEmailError('Неверный формат почты.');
+    //   return;
+    // }
 
     const data = {
       firstName,
