@@ -89,12 +89,11 @@ const UserInfoPage: React.FC = () => {
 
   return (
     <div>
-      <ProfileButton></ProfileButton>
+      <ProfileButton />
       <h1>Информация о пользователе</h1>
-      {user && (
-        <div style={{backgroundColor: 'grey'}}>
+      {user ? ( // Проверяем, есть ли данные о пользователе
+        <div style={{ backgroundColor: 'grey' }}>
           <p><strong>ID:</strong> {user.id}</p>
-          {/* <p><strong>Бейдж:</strong> {user.badge}</p> */}
           
           {isEditing && user.id === userId ? (
             <>
@@ -116,14 +115,16 @@ const UserInfoPage: React.FC = () => {
             </>
           )}
         </div>
+      ) : (
+        <div>Загрузка...</div> // Сообщение о загрузке, пока user еще не загружен
       )}
-      {user.id === userId ? (
-            <button onClick={isEditing ? handleSaveChanges : handleEditToggle}>
-              {isEditing ? "Сохранить изменения" : "Редактировать"}
-            </button>
-          ) : (
-            <p>Вы можете только просмотреть информацию о выбранном пользователе.</p>
-          )}
+      {user && user.id === userId ? ( // Проверяем, существует ли user перед доступом к id
+        <button onClick={isEditing ? handleSaveChanges : handleEditToggle}>
+          {isEditing ? "Сохранить изменения" : "Редактировать"}
+        </button>
+      ) : (
+        <p>Вы можете только просмотреть информацию о выбранном пользователе.</p>
+      )}
     </div>
   );
 };
