@@ -89,38 +89,38 @@
 //   .catch(error => {
 //     console.error("Ошибка:", error); 
 //   });
-const url = "http://localhost:8081/api/soft/1";
-fetch(url, {
-  method: "GET", 
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Ошибка в запросе: " + response.status);
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Предполагаем, что data - это массив объектов
-    if (Array.isArray(data)) {
-      data.forEach(item => {
-        console.log(`softSkillId: ${item.softSkillId},`);
-        console.log(`competencyName: '${item.competencyName}',`);
-        console.log(`categoryName: '${item.categoryName}',`);
-        console.log(`softGradeResponses: [`);
+// const url = "http://localhost:8081/api/soft/1";
+// fetch(url, {
+//   method: "GET", 
+// })
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error("Ошибка в запросе: " + response.status);
+//     }
+//     return response.json();
+//   })
+//   .then(data => {
+//     // Предполагаем, что data - это массив объектов
+//     if (Array.isArray(data)) {
+//       data.forEach(item => {
+//         console.log(`softSkillId: ${item.softSkillId},`);
+//         console.log(`competencyName: '${item.competencyName}',`);
+//         console.log(`categoryName: '${item.categoryName}',`);
+//         console.log(`softGradeResponses: [`);
         
-        item.softGradeResponses.forEach(response => {
-          console.log(`  { workerId: ${response.workerId}, competencyLevel: ${response.competencyLevel}, competencyLevelId: ${response.competencyLevelId} }`);
-        });
+//         item.softGradeResponses.forEach(response => {
+//           console.log(`  { workerId: ${response.workerId}, competencyLevel: ${response.competencyLevel}, competencyLevelId: ${response.competencyLevelId} }`);
+//         });
         
-        console.log(`]`);
-      });
-    } else {
-      console.log("Ответ не является массивом.");
-    }
-  })
-  .catch(error => {
-    console.error("Ошибка:", error); 
-  });
+//         console.log(`]`);
+//       });
+//     } else {
+//       console.log("Ответ не является массивом.");
+//     }
+//   })
+//   .catch(error => {
+//     console.error("Ошибка:", error); 
+//   });
 
 
 // fetch(`http://localhost:8081/api/users/1`)
@@ -140,24 +140,24 @@ fetch(url, {
 
 //PUT
 
-fetch('http://localhost:8081/api/soft', {
-  method: 'PUT',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    softSkillId: 1,
-    workerId: 1,
-    competencyLevelId: 1
-  })
-})
-.then(response => response.text()) // Изменено на text()
-.then(data => {
-  console.log( data); // Здесь будет "Оценка успешна изменена"
-})
-.catch(error => {
-  console.error('There was a problem with the PUT request:', error);
-});
+// fetch('http://localhost:8081/api/soft', {
+//   method: 'PUT',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify({
+//     softSkillId: 1,
+//     workerId: 1,
+//     competencyLevelId: 1
+//   })
+// })
+// .then(response => response.text()) // Изменено на text()
+// .then(data => {
+//   console.log( data); // Здесь будет "Оценка успешна изменена"
+// })
+// .catch(error => {
+//   console.error('There was a problem with the PUT request:', error);
+// });
 
 //POST
 
@@ -179,4 +179,20 @@ fetch('http://localhost:8081/api/soft', {
 // .catch(error => {
 //   console.error('There was a problem with the POST request:', error);
 // });
+
+const url = 'http://localhost:8081/api/hard'
+
+fetch(url, {
+  method: 'GET',
+  headers: {
+        'Content-Type': 'application/json', // Указываем тип данных как JSON
+      },
+})
+.then((response) => {
+  return response.json()
+})
+.then((data) => console.log(data))
+
+//.roles[0].specializations
+
 
