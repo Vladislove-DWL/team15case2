@@ -185,7 +185,7 @@ const url = 'http://localhost:8081/api/hard'
 fetch(url, {
   method: 'GET',
   headers: {
-        'Content-Type': 'application/json', // Указываем тип данных как JSON
+        'Content-Type': 'application/json',
       },
 })
 .then((response) => {

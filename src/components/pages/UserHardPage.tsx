@@ -2,6 +2,7 @@
 import { useUser } from '../context/UserContext';
 import ProfileButton from "../atoms/ProfileButton";
 import SoftHeader from '../organisms/SoftHeader';
+import HardSkillsForm from '../molecules/HardSkillsForm';
 
 const UserHardPage: React.FC = () => {
   const {userId} = useUser()
@@ -9,6 +10,7 @@ const UserHardPage: React.FC = () => {
       <div>
         <ProfileButton></ProfileButton>
         <SoftHeader></SoftHeader>
+        <HardSkillsForm></HardSkillsForm>
         <h1>Hard Skills</h1>
         <p>Эта страница еще в разработке</p>
         <p>Ваш уникальный идентификатор пользователя: {userId}</p>
