@@ -26,7 +26,7 @@ const SignInCard: React.FC<SignInCardProps> = ({ onRegisterClick }) => {
     }
 
     try {
-      const response = await fetch('http://10.4.56.61:8081/api/auth/login', {
+      const response = await fetch('http://localhost:8081/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
