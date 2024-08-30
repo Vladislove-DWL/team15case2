@@ -24,10 +24,10 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
   const [isLoading, setIsLoading] = useState(false); 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const validateEmail = (email: string) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-  };
+  // const validateEmail = (email: string) => {
+  //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   return re.test(String(email).toLowerCase());
+  // };
 
   const validateFields = () => {
     const errors: { [key: string]: string } = {};
