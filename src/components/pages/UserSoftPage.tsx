@@ -38,11 +38,11 @@ const UserSoftPage: React.FC = () => {
       const fetchUserId = paramUserId ? Number(paramUserId) : userId;
 
       try {
-        const response = await fetch(`http://localhost:8081/api/soft/${fetchUserId}`);
+        const response = await fetch(`http://10.4.56.61:8081/api/soft/${fetchUserId}`);
         
         if (!response.ok) {
           if (response.status === 404 && paramUserId) {
-            const fallbackResponse = await fetch(`http://localhost:8081/api/soft/${userId}`);
+            const fallbackResponse = await fetch(`http://10.4.56.61:8081/api/soft/${userId}`);
             if (!fallbackResponse.ok) {
               throw new Error(`Ошибка: ${fallbackResponse.status}`);
             }
@@ -100,7 +100,7 @@ const UserSoftPage: React.FC = () => {
         };
 
         try {
-          const res = await fetch('http://localhost:8081/api/soft', {
+          const res = await fetch('http://10.4.56.61:8081/api/soft', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ const UserSoftPage: React.FC = () => {
         const method = skill.softGradeResponses.find(response => response.workerId === userId) ? 'PUT' : 'POST';
 
         try {
-          const res = await fetch('http://localhost:8081/api/soft', {
+          const res = await fetch('http://10.4.56.61:8081/api/soft', {
             method: method,
             headers: {
               'Content-Type': 'application/json',

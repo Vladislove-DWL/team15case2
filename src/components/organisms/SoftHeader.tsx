@@ -23,7 +23,7 @@ const SoftHeader: React.FC = () => {
       const fetchUserId = selectedUser?.id || userId; // Если выбранный пользователь есть, используем его ID, иначе используем ID авторизованного пользователя
 
       try {
-        const response = await fetch(`http://localhost:8081/api/users/${fetchUserId}`);
+        const response = await fetch(`http://10.4.56.61:8081/api/users/${fetchUserId}`);
         if (!response.ok) {
           throw new Error('Ошибка при загрузке данных пользователя');
         }

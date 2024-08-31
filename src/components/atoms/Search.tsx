@@ -37,7 +37,7 @@ const Search: React.FC = () => {
   // Функция для запроса данных
   const fetchPeople = async () => {
     try {
-      const response = await fetch(`http://localhost:8081/api/users`);
+      const response = await fetch(`http://10.4.56.61:8081/api/users`);
       if (!response.ok) throw new Error('Network response was not ok');
       const data: Person[] = await response.json();
 

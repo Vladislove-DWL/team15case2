@@ -29,7 +29,7 @@ const UserInfoPage: React.FC = () => {
       const idToFetch = paramUserId ? parseInt(paramUserId) : userId; // Используем userId из параметров или контекста
 
       try {
-        const response = await fetch(`http://localhost:8081/api/users/${idToFetch}`);
+        const response = await fetch(`http://10.4.56.61:8081/api/users/${idToFetch}`);
         if (!response.ok) {
           throw new Error(`Ошибка при загрузке данных: ${response.status}`);
         }
@@ -58,7 +58,7 @@ const UserInfoPage: React.FC = () => {
     if (!user) return;
 
     try {
-      const response = await fetch(`http://localhost:8081/api/users/${user.id}`, {
+      const response = await fetch(`http://10.4.56.61:8081/api/users/${user.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

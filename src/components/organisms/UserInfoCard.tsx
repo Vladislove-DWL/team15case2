@@ -25,7 +25,7 @@ const UserInfoCard: React.FC = () => {
   // Функция для получения информации о пользователе
   const fetchUserInfo = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8081/api/users/${id}`);
+      const response = await fetch(`http://localhost:10.4.56.61/api/users/${id}`);
       if (!response.ok) {
         throw new Error('Ошибка сети: ' + response.status);
       }

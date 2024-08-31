@@ -180,19 +180,91 @@
 //   console.error('There was a problem with the POST request:', error);
 // });
 
-const url = 'http://localhost:8081/api/hard'
+// const url = 'http://localhost:8081/api/hard'
 
-fetch(url, {
-  method: 'GET',
-  headers: {
-        'Content-Type': 'application/json',
-      },
-})
-.then((response) => {
-  return response.json()
-})
-.then((data) => console.log(data))
+// fetch(url, {
+//   method: 'GET',
+//   headers: {
+//         'Content-Type': 'application/json',
+//       },
+// })
+// .then((response) => {
+//   return response.json()
+// })
+// .then((data) => console.log(data))
 
-//.roles[0].specializations
+// //.roles[0].specializations
 
+// Определяем URL и тело запроса
+// Определяем URL и тело запроса
+// const url = 'http://localhost:8081/api/hard/3';
+// const requestBody = {
+//     positionId: 6,  // Изменено на данные, отправляемые через Swagger
+//     specializationId: 2,
+//     freeHours: 8
+// };
 
+// // Отправляем POST-запрос
+// fetch(url, {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json' // Указываем, что отправляем JSON
+//     },
+//     body: JSON.stringify(requestBody) // Преобразуем объект в строку JSON
+// })
+// .then(response => {
+//     console.log('Response status:', response.status); // Выводим статус ответа
+//     return response.text().then(text => {
+//         if (!response.ok) {
+//             throw new Error(`Network response was not ok: ${response.status} - ${text}`);
+//         }
+//         return JSON.parse(text); // Парсим ответ как JSON
+//     });
+// })
+// .then(data => {
+//     console.log('Success:', data); // Обрабатываем полученные данные
+// })
+// .catch(error => {
+//     console.error('Error:', error); // Обрабатываем ошибки
+// });
+
+// fetch('http://10.4.56.61:8081/api/users', {
+//   method: 'GET',
+//   headers: {
+//     'Accept': 'application/json',
+//     // Если требуется аутентификация, добавьте заголовок Authorization
+//     // 'Authorization': 'Bearer YOUR_TOKEN_HERE'
+//   }
+// })
+// .then(response => {
+//   if (!response.ok) {
+//     throw new Error(`HTTP error! status: ${response.status}`);
+//   }
+//   return response.json();
+// })
+// .then(data => {
+//   console.log('Полученные данные:', data);
+//   // Здесь вы можете обработать полученные данные
+// })
+// .catch(error => {
+//   console.error('Произошла ошибка при выполнении запроса:', error);
+// });
+
+  fetch('http://10.4.56.61:8081/api/users', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Полученные данные:', data);
+  })
+  .catch(error => {
+    console.error('Произошла ошибка при выполнении запроса:', error);
+  });
