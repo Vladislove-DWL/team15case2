@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useSelectedUser } from '../context/SelectedUserContext'; // Импортируем хук для выбранного пользователя
-import { useUser } from '../context/UserContext'; // Импортируем хук для авторизованного пользователя
-import { useNavigate } from 'react-router-dom'; // Импортируем хук для навигации
+import { useEffect, useState } from 'react';
+import { useSelectedUser } from '../context/SelectedUserContext';
+import { useUser } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
+import '../../index.css'
 
-// Определяем интерфейс для данных пользователя
 interface UserInfo {
-  id: number; // Добавляем ID для запроса
+  id: number;
   firstName: string;
   lastName: string;
   middleName: string;
@@ -15,68 +15,62 @@ interface UserInfo {
 }
 
 const UserInfoCard: React.FC = () => {
-  const { selectedUser } = useSelectedUser(); // Получаем выбранного пользователя из контекста
-  const { userId } = useUser(); // Получаем авторизованного пользователя из контекста
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null); // Состояние для хранения информации о пользователе
-  const [error, setError] = useState<string | null>(null); // Состояние для ошибок
-  const [loading, setLoading] = useState<boolean>(true); // Состояние для загрузки
-  const navigate = useNavigate(); // Инициализируем навигацию
+  const { selectedUser } = useSelectedUser();
+  const { userId } = useUser();
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
-  // Функция для получения информации о пользователе
   const fetchUserInfo = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:10.4.56.61/api/users/${id}`);
+      const response = await fetch(`http://localhost:8081/api/users/${id}`);
       if (!response.ok) {
         throw new Error('Ошибка сети: ' + response.status);
       }
-      const data: UserInfo = await response.json(); // Указываем тип данных
-      setUserInfo(data); // Устанавливаем данные в состояние
-      setError(null); // Сбрасываем ошибку
+      const data: UserInfo = await response.json();
+      setUserInfo(data);
+      setError(null);
     } catch (error) {
       console.error('Ошибка при получении данных о пользователе:', error);
-      setError('Не удалось загрузить данные пользователя.'); // Устанавливаем сообщение об ошибке
+      setError('Не удалось загрузить данные пользователя.');
     } finally {
-      setLoading(false); // Завершаем загрузку
+      setLoading(false);
     }
   };
 
-  // Используем useEffect для получения данных при изменении выбранного пользователя или авторизованного пользователя
   useEffect(() => {
-    const userIdToFetch = selectedUser ? selectedUser.id : userId; // Проверяем, какой пользователь должен быть загружен
-
+    const userIdToFetch = selectedUser ? selectedUser.id : userId;
     if (userIdToFetch) {
-      setLoading(true); // Начинаем загрузку
-      fetchUserInfo(userIdToFetch); // Запрашиваем информацию о выбранном или авторизованном пользователе
+      setLoading(true);
+      fetchUserInfo(userIdToFetch);
     } else {
-      setUserInfo(null); // Если ни один пользователь не выбран, сбрасываем данные
+      setUserInfo(null);
     }
-  }, [selectedUser, userId]); // Запрос выполняется каждый раз, когда selectedUser или userId изменяются
+  }, [selectedUser, userId]);
 
-  // Обработчик нажатия кнопки "Посмотреть"
   const handleViewProfile = () => {
-    const idToView = selectedUser ? selectedUser.id : userId; // Определяем ID для перехода
+    const idToView = selectedUser ? selectedUser.id : userId;
     if (idToView) {
-      navigate(`/userinfopage/${idToView}`); // Перенаправляем на страницу пользователя
+      navigate(`/userinfopage/${idToView}`);
     }
   };
 
   return (
-    <div style={{ background: '#00A4DC', padding: '20px', borderRadius: '5px', margin: '20px', color: 'white' }}>
+    <div className="user-info-card">
       <h1>Общие сведения</h1>
-      {loading && <p>Загрузка информации о пользователе...</p>} {/* Сообщение при загрузке */}
-      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Отображаем ошибку, если она есть */}
-      {userInfo && ( // Проверяем, есть ли данные о пользователе
-        <div>
-          <h2><span style ={{color: 'black'}}>Фамилия:</span> {userInfo.lastName}</h2>
-          <h2><span style ={{color: 'black'}}>Имя:</span> {userInfo.firstName}</h2>
-          <h2><span style ={{color: 'black'}}>Отчество:</span> {userInfo.middleName}</h2>
-          <h2><span style ={{color: 'black'}}>Город:</span> {userInfo.city}</h2>
-          <h2><span style ={{color: 'black'}}>Дата рождения:</span> {userInfo.birthday}</h2>
+      {loading && <p>Загрузка информации о пользователе...</p>}
+      {error && <p className="error">{error}</p>}
+      {userInfo && (
+        <div className="user-info-details">
+          <h2><span>Фамилия:</span> {userInfo.lastName}</h2>
+          <h2><span>Имя:</span> {userInfo.firstName}</h2>
+          <h2><span>Отчество:</span> {userInfo.middleName}</h2>
+          <h2><span>Город:</span> {userInfo.city}</h2>
+          <h2><span>Дата рождения:</span> {userInfo.birthday}</h2>
         </div>
       )}
-      <button onClick={handleViewProfile} style={{ marginTop: '10px' }}>
-        Посмотреть
-      </button>
+      <button onClick={handleViewProfile}>Посмотреть</button>
     </div>
   );
 };

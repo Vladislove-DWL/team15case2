@@ -1,14 +1,10 @@
-// Импортируем необходимые библиотеки и контексты
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../context/UserContext';
 import { useParams } from 'react-router-dom';
-// import DefaultHeader from '../organisms/DefaultHeader';
 import ProfileButton from '../atoms/ProfileButton';
 import SoftHeader from '../organisms/SoftHeader';
 import SoftLegend from '../atoms/SoftLegend';
-// import './UserSoftPage.css'; // Импортируем стили
 
-// Определяем интерфейсы для типов данных
 interface SoftGradeResponse {
   workerId: number;
   competencyLevel: number;
@@ -38,11 +34,11 @@ const UserSoftPage: React.FC = () => {
       const fetchUserId = paramUserId ? Number(paramUserId) : userId;
 
       try {
-        const response = await fetch(`http://10.4.56.61:8081/api/soft/${fetchUserId}`);
+        const response = await fetch(`http://localhost:8081/api/soft/${fetchUserId}`);
         
         if (!response.ok) {
           if (response.status === 404 && paramUserId) {
-            const fallbackResponse = await fetch(`http://10.4.56.61:8081/api/soft/${userId}`);
+            const fallbackResponse = await fetch(`http://localhost:8081/api/soft/${userId}`);
             if (!fallbackResponse.ok) {
               throw new Error(`Ошибка: ${fallbackResponse.status}`);
             }
@@ -100,7 +96,7 @@ const UserSoftPage: React.FC = () => {
         };
 
         try {
-          const res = await fetch('http://10.4.56.61:8081/api/soft', {
+          const res = await fetch('http://localhost:8081/api/soft', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -116,7 +112,6 @@ const UserSoftPage: React.FC = () => {
         }
       }
 
-      // Сохранение оценок для третьего кружка
       if (!isOwnPage && thirdCircleRatings[skill.softSkillId] !== null) {
         const rating = thirdCircleRatings[skill.softSkillId]!;
         const requestBody = {
@@ -128,7 +123,7 @@ const UserSoftPage: React.FC = () => {
         const method = skill.softGradeResponses.find(response => response.workerId === userId) ? 'PUT' : 'POST';
 
         try {
-          const res = await fetch('http://10.4.56.61:8081/api/soft', {
+          const res = await fetch('http://localhost:8081/api/soft', {
             method: method,
             headers: {
               'Content-Type': 'application/json',
@@ -181,7 +176,6 @@ const UserSoftPage: React.FC = () => {
     return acc;
   }, {} as { [key: string]: SoftSkill[] });
 
-  // Преобразуем категории в массив, чтобы разбить на 4 колонки
   const categories = Object.entries(groupedByCategory);
   const columnCount = 4;
   const columns: JSX.Element[][] = Array.from({ length: columnCount }, () => []);
@@ -198,7 +192,6 @@ const UserSoftPage: React.FC = () => {
 
           return (
             <div key={skill.softSkillId} style={{ margin: '20px', border: '5px gray solid', padding: '10px'  }}>
-              {/* Используем flex для выравнивания в одну строку */}
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div
                   style={{
@@ -249,7 +242,6 @@ const UserSoftPage: React.FC = () => {
                     {thirdCircleRating !== null ? thirdCircleRating : '+'}
                   </div>
                 )}
-                {/* Здесь также обработка дропдаунов для оценок */}
                 {openDropdown[skill.softSkillId] && isOwnPage && (
                   <div style={{ position: 'absolute', backgroundColor: 'white', border: '1px solid gray', borderRadius: '4px', marginTop: '10px' }}>
                     {[-1, 0, 1, 2, 3].map(level => (

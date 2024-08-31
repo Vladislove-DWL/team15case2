@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../context/UserContext';
-import { useSelectedUser } from '../context/SelectedUserContext'; // Импортируйте контекст выбранного пользователя
+import { useSelectedUser } from '../context/SelectedUserContext'; 
+import '../../index.css'
 
 interface UserData {
   lastName: string;
@@ -10,52 +11,50 @@ interface UserData {
 }
 
 const SoftHeader: React.FC = () => {
-  const { userId } = useUser(); // Получаем userId из контекста авторизованного пользователя
-  const { selectedUser } = useSelectedUser(); // Получаем выбранного пользователя из контекста
-  const [userData, setUserData] = useState<UserData | null>(null); // Состояние для хранения данных пользователя
-  const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
-  const [error, setError] = useState<string | null>(null); // Состояние ошибки
+  const { userId } = useUser(); 
+  const { selectedUser } = useSelectedUser(); 
+  const [userData, setUserData] = useState<UserData | null>(null); 
+  const [isLoading, setIsLoading] = useState(true); 
+  const [error, setError] = useState<string | null>(null); 
 
   useEffect(() => {
-    // Функция для получения данных пользователя
     const fetchUserData = async () => {
-      // Определяем, какой ID использовать
-      const fetchUserId = selectedUser?.id || userId; // Если выбранный пользователь есть, используем его ID, иначе используем ID авторизованного пользователя
+      const fetchUserId = selectedUser?.id || userId; 
 
       try {
-        const response = await fetch(`http://10.4.56.61:8081/api/users/${fetchUserId}`);
+        const response = await fetch(`http://localhost:8081/api/users/${fetchUserId}`);
         if (!response.ok) {
           throw new Error('Ошибка при загрузке данных пользователя');
         }
         const data = await response.json();
-        setUserData(data); // Устанавливаем данные пользователя в состояние
+        setUserData(data); 
       } catch (err) {
         setError((err as Error).message);
       } finally {
-        setIsLoading(false); // Завершаем загрузку
+        setIsLoading(false); 
       }
     };
 
     if (selectedUser || userId) {
-      fetchUserData(); // Выполняем запрос, если есть выбранный пользователь или авторизованный пользователь
+      fetchUserData(); 
     }
   }, [userId, selectedUser]);
 
   if (isLoading) {
-    return <p>Загрузка...</p>; // Отображаем индикатор загрузки
+    return <p>Загрузка...</p>; 
   }
 
   if (error) {
-    return <p>Ошибка: {error}</p>; // Отображаем сообщение об ошибке
+    return <p>Ошибка: {error}</p>; 
   }
 
   if (!userData) {
-    return <p>Данные пользователя не найдены</p>; // Отображаем, если данных нет
+    return <p>Данные пользователя не найдены</p>; 
   }
 
   return (
-    <div>
-      <p>ФИО: {`${userData.lastName} ${userData.firstName} ${userData.middleName}`}</p>
+    <div className="soft-header">
+      <p className="soft-header__text">ФИО: {`${userData.lastName} ${userData.firstName} ${userData.middleName}`}</p>
     </div>
   );
 };

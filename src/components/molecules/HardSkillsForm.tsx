@@ -1,6 +1,5 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, ChangeEvent} from 'react';
 
-// Типы для данных
 interface Position {
   positionId: number;
   positionName: string;
@@ -50,7 +49,7 @@ const HardSkillsForm: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://10.4.56.61:8081/api/hard', {
+        const response = await fetch('http://localhost:8081/api/hard', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -99,7 +98,7 @@ const HardSkillsForm: React.FC = () => {
       console.log('Payload:', payload);
 
       try {
-        const response = await fetch(`http://10.4.56.61:8081/api/hard/${selectedPosition}`, {
+        const response = await fetch(`http://localhost:8081/api/hard/${selectedPosition}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -112,9 +111,6 @@ const HardSkillsForm: React.FC = () => {
 
         if (response.ok) {
           console.log('Данные успешно отправлены');
-          // Не сбрасываем selectedPosition и selectedSpecialization
-          // setSelectedPosition(null);
-          // setSelectedSpecialization(null);
           setSelectedLevel(0);
         } else {
           console.error('Ошибка при отправке данных', responseData);
@@ -130,7 +126,7 @@ const HardSkillsForm: React.FC = () => {
   const handleCreateProfile = async () => {
     if (selectedPosition !== null) {
       try {
-        const response = await fetch(`http://10.4.56.61:8081/api/hard/${selectedPosition}`, {
+        const response = await fetch(`http://localhost:8081/api/hard/${selectedPosition}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -156,7 +152,6 @@ const HardSkillsForm: React.FC = () => {
   const renderProfileData = () => {
     if (!profileData || !profileData.hardSkills || !Array.isArray(profileData.hardSkills)) return null;
   
-    // Сгруппируем компетенции по категориям
     const categoriesMap: Record<string, HardSkill[]> = {};
     profileData.hardSkills.forEach(skill => {
       if (!categoriesMap[skill.categoryName]) {
@@ -165,7 +160,6 @@ const HardSkillsForm: React.FC = () => {
       categoriesMap[skill.categoryName].push(skill);
     });
   
-    // Найдем категорию с наибольшим количеством компетенций
     const maxCategory = Object.keys(categoriesMap).reduce((prev, current) => {
       return categoriesMap[prev].length > categoriesMap[current].length ? prev : current;
     });

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
+import '../../index.css'
 
 interface SignUpCardProps {
   onLoginClick: () => void;
@@ -8,7 +9,7 @@ interface SignUpCardProps {
 
 const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
   const navigate = useNavigate();
-  const { setUserId } = useUser(); 
+  const { setUserId } = useUser();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -18,28 +19,28 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState(''); 
+  const [emailError, setEmailError] = useState('');
   const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string }>({});
-  const [error, setError] = useState(''); 
-  const [isLoading, setIsLoading] = useState(false); 
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  // const validateEmail = (email: string) => {
-  //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   return re.test(String(email).toLowerCase());
-  // };
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
 
   const validateFields = () => {
     const errors: { [key: string]: string } = {};
 
-    // if (!firstName.trim()) errors.firstName = 'Поле должно быть заполнено';
-    // if (!lastName.trim()) errors.lastName = 'Поле должно быть заполнено';
-    // if (!middleName.trim()) errors.middleName = 'Поле должно быть заполнено';
-    // if (!birthday) errors.birthday = 'Поле должно быть заполнено';
-    // if (!city.trim()) errors.city = 'Поле должно быть заполнено';
-    // if (!phone.trim()) errors.phone = 'Поле должно быть заполнено';
-    // if (!email.trim()) errors.email = 'Поле должно быть заполнено';
-    // if (!password.trim()) errors.password = 'Поле должно быть заполнено';
+    if (!firstName.trim()) errors.firstName = 'Поле должно быть заполнено';
+    if (!lastName.trim()) errors.lastName = 'Поле должно быть заполнено';
+    if (!middleName.trim()) errors.middleName = 'Поле должно быть заполнено';
+    if (!birthday) errors.birthday = 'Поле должно быть заполнено';
+    if (!city.trim()) errors.city = 'Поле должно быть заполнено';
+    if (!phone.trim()) errors.phone = 'Поле должно быть заполнено';
+    if (!email.trim()) errors.email = 'Поле должно быть заполнено';
+    if (!password.trim()) errors.password = 'Поле должно быть заполнено';
 
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
@@ -54,11 +55,11 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
     setError('');
     setEmailError('');
 
-    // if (!validateFields()) return;
-    // if (!validateEmail(email)) {
-    //   setEmailError('Неверный формат почты.');
-    //   return;
-    // }
+    if (!validateFields()) return;
+    if (!validateEmail(email)) {
+      setEmailError('Неверный формат почты.');
+      return;
+    }
 
     const data = {
       firstName,
@@ -74,7 +75,7 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://10.4.56.61:8081/api/auth/register', {
+      const response = await fetch('http://localhost:8081/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,14 +105,14 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    <div className="sign-up-card">
       <h2>Регистрация:</h2>
       <input
         type="text"
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
         placeholder={formSubmitted && fieldErrors.firstName ? fieldErrors.firstName : 'Имя'}
-        style={{ borderColor: formSubmitted && fieldErrors.firstName ? 'red' : 'initial' }}
+        className={formSubmitted && fieldErrors.firstName ? 'input-error' : ''}
       />
       
       <input
@@ -119,7 +120,7 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
         placeholder={formSubmitted && fieldErrors.lastName ? fieldErrors.lastName : 'Фамилия'}
-        style={{ borderColor: formSubmitted && fieldErrors.lastName ? 'red' : 'initial' }}
+        className={formSubmitted && fieldErrors.lastName ? 'input-error' : ''}
       />
       
       <input
@@ -127,15 +128,14 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
         value={middleName}
         onChange={(e) => setMiddleName(e.target.value)}
         placeholder={formSubmitted && fieldErrors.middleName ? fieldErrors.middleName : 'Отчество'}
-        style={{ borderColor: formSubmitted && fieldErrors.middleName ? 'red' : 'initial' }}
+        className={formSubmitted && fieldErrors.middleName ? 'input-error' : ''}
       />
       
       <input
         type="date"
         value={birthday}
         onChange={(e) => setBirthday(e.target.value)}
-        placeholder={formSubmitted && fieldErrors.birthday ? fieldErrors.birthday : 'Дата рождения'}
-        style={{ borderColor: formSubmitted && fieldErrors.birthday ? 'red' : 'initial' }}
+        className={formSubmitted && fieldErrors.birthday ? 'input-error' : ''}
       />
       
       <input
@@ -143,7 +143,7 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
         value={city}
         onChange={(e) => setCity(e.target.value)}
         placeholder={formSubmitted && fieldErrors.city ? fieldErrors.city : 'Город'}
-        style={{ borderColor: formSubmitted && fieldErrors.city ? 'red' : 'initial' }}
+        className={formSubmitted && fieldErrors.city ? 'input-error' : ''}
       />
       
       <input
@@ -151,7 +151,7 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         placeholder={formSubmitted && fieldErrors.phone ? fieldErrors.phone : 'Телефон'}
-        style={{ borderColor: formSubmitted && fieldErrors.phone ? 'red' : 'initial' }}
+        className={formSubmitted && fieldErrors.phone ? 'input-error' : ''}
       />
       
       <input
@@ -162,19 +162,19 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ onLoginClick }) => {
           setEmailError(''); 
         }}
         placeholder={formSubmitted && (emailError || fieldErrors.email) ? emailError || fieldErrors.email : 'Электронная почта'}
-        style={{ borderColor: formSubmitted && (emailError || fieldErrors.email) ? 'red' : 'initial' }}
+        className={formSubmitted && (emailError || fieldErrors.email) ? 'input-error' : ''}
       />
-      {emailError && <p style={{ color: 'red' }}>{emailError}</p>} {/* Сообщение об ошибке почты */}
+      {emailError && <p className="error-message">{emailError}</p>}
       
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder={formSubmitted && fieldErrors.password ? fieldErrors.password : 'Пароль'}
-        style={{ borderColor: formSubmitted && fieldErrors.password ? 'red' : 'initial' }}
+        className={formSubmitted && fieldErrors.password ? 'input-error' : ''}
       />
       
-      {error && <p style={{ color: 'red' }}>{error}</p>} 
+      {error && <p className="error-message">{error}</p>}
       {isLoading ? (
         <p>Загрузка...</p>
       ) : (

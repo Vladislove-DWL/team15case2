@@ -1,22 +1,23 @@
-// import React, { useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useSelectedUser } from '../context/SelectedUserContext'; // Импортируйте ваш контекст
+import { useSelectedUser } from '../context/SelectedUserContext'; 
+import '../../index.css'
 
 const ProfileButton: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { setSelectedUser } = useSelectedUser(); // Получаем функцию для сброса ID
+  const { setSelectedUser } = useSelectedUser(); 
 
   const handleProfilePage = () => {
-    // Проверяем, находимся ли на странице профиля
     if (location.pathname === '/profilepage') {
-      setSelectedUser(null); // Сброс ID выбранного пользователя
+      setSelectedUser(null); 
     }
-    navigate('/profilepage'); // Переход на страницу профиля
+    navigate('/profilepage'); 
   };
 
   return (
-    <button onClick={handleProfilePage}>Профиль</button>
+    <button className="profile-button" onClick={handleProfilePage}>
+      Профиль
+    </button>
   );
 };
 

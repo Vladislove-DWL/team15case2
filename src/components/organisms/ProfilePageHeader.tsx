@@ -1,47 +1,20 @@
-import React from 'react';
+import '../../index.css'
 
 const ProfileHeader: React.FC = () => {
   return (
-    <div style={styles.container}>
-      <div style={styles.textContainer}>
-        <h1 style={styles.text}>ПРОФИЛЬ IT-СПЕЦИАЛИСТА</h1>
+    <div className="profile-header">
+      <div className="text-container">
+        <h1 className="header-text">ПРОФИЛЬ IT-СПЕЦИАЛИСТА</h1>
       </div>
-      <div style={styles.imageContainer}>
+      <div className="image-container">
         <img
-          src="../../src/assets/логоТ1.png" 
+          src="../../src/assets/logo.png" 
           alt="IT Specialist"
-          style={styles.image}
+          className="header-image"
         />
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    padding: '20px',
-    backgroundColor: '#f0f0f0', // Фон для всего компонента
-  },
-  textContainer: {
-    flex: 1, // Занимает все доступное пространство, кроме отведенного под картинку
-  },
-  text: {
-    fontSize: '70px',
-    fontWeight: 'bold',
-    margin: 0, // Убираем отступы
-  },
-  imageContainer: {
-    flexShrink: 0, // Картинка не будет сжиматься
-    marginLeft: '20px', // Отступ между текстом и картинкой
-  },
-  image: {
-    maxWidth: '100%', // Заставляем картинку занимать максимум возможной ширины
-    height: 'auto', // Сохраняем пропорции картинки
-  },
 };
 
 export default ProfileHeader;

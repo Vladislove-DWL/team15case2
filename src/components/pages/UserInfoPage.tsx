@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-// import DefaultHeader from "../organisms/DefaultHeader";
+import { useEffect, useState } from 'react';
 import ProfileButton from '../atoms/ProfileButton';
 import { useUser } from '../context/UserContext';
-import { useParams } from 'react-router-dom'; // Импортируем useParams
+import { useParams } from 'react-router-dom'; 
 
-// Интерфейс для данных пользователя
+
 interface User {
   id: number;
-  badge: number; // Обязательное поле
+  badge: number; 
   firstName: string;
   lastName: string;
   middleName: string;
@@ -17,19 +16,19 @@ interface User {
 }
 
 const UserInfoPage: React.FC = () => {
-  const { userId } = useUser(); // Получаем userId из контекста
-  const { userId: paramUserId } = useParams<{ userId: string }>(); // Получаем userId из параметров
-  const [user, setUser] = useState<User | null>(null); // Состояние для пользователя
+  const { userId } = useUser();
+  const { userId: paramUserId } = useParams<{ userId: string }>(); 
+  const [user, setUser] = useState<User | null>(null); 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const idToFetch = paramUserId ? parseInt(paramUserId) : userId; // Используем userId из параметров или контекста
+      const idToFetch = paramUserId ? parseInt(paramUserId) : userId;
 
       try {
-        const response = await fetch(`http://10.4.56.61:8081/api/users/${idToFetch}`);
+        const response = await fetch(`http://localhost:8081/api/users/${idToFetch}`);
         if (!response.ok) {
           throw new Error(`Ошибка при загрузке данных: ${response.status}`);
         }
@@ -38,12 +37,12 @@ const UserInfoPage: React.FC = () => {
       } catch (error) {
         setError(error instanceof Error ? error.message : "Произошла ошибка при загрузке данных");
       } finally {
-        setLoading(false); // Обновляем состояние загрузки
+        setLoading(false);
       }
     };
 
     fetchUserData();
-  }, [paramUserId, userId]); // Запрос выполняется только при изменении paramUserId или userId
+  }, [paramUserId, userId]); 
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -58,7 +57,7 @@ const UserInfoPage: React.FC = () => {
     if (!user) return;
 
     try {
-      const response = await fetch(`http://10.4.56.61:8081/api/users/${user.id}`, {
+      const response = await fetch(`http://localhost:8081/api/users/${user.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +77,6 @@ const UserInfoPage: React.FC = () => {
     }
   };
 
-  // Проверяем состояние загрузки и ошибки
   if (loading) {
     return <div>Загрузка...</div>;
   }
@@ -91,8 +89,8 @@ const UserInfoPage: React.FC = () => {
     <div>
       <ProfileButton />
       <h1>Информация о пользователе</h1>
-      {user ? ( // Проверяем, есть ли данные о пользователе
-        <div style={{ backgroundColor: 'grey' }}>
+      {user ? ( 
+        <div style={{ backgroundColor: '#00A4DC', color: 'white', fontSize: '1.5rem', padding: '15px', borderRadius: '20px' }}>
           <p><strong>ID:</strong> {user.id}</p>
           
           {isEditing && user.id === userId ? (
@@ -116,9 +114,9 @@ const UserInfoPage: React.FC = () => {
           )}
         </div>
       ) : (
-        <div>Загрузка...</div> // Сообщение о загрузке, пока user еще не загружен
+        <div>Загрузка...</div>
       )}
-      {user && user.id === userId ? ( // Проверяем, существует ли user перед доступом к id
+      {user && user.id === userId ? ( 
         <button onClick={isEditing ? handleSaveChanges : handleEditToggle}>
           {isEditing ? "Сохранить изменения" : "Редактировать"}
         </button>
@@ -129,4 +127,4 @@ const UserInfoPage: React.FC = () => {
   );
 };
 
-export default UserInfoPage;
+export default UserInfoPage;  

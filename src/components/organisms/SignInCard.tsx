@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
+import '../../index.css';
 
 interface SignInCardProps {
   onRegisterClick: () => void;
@@ -9,11 +10,11 @@ interface SignInCardProps {
 const SignInCard: React.FC<SignInCardProps> = ({ onRegisterClick }) => {
   const navigate = useNavigate();
   const { setUserId } = useUser();
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(''); // Состояние для отображения ошибок
-
+  const [error, setError] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleLogin = async () => {
@@ -26,7 +27,7 @@ const SignInCard: React.FC<SignInCardProps> = ({ onRegisterClick }) => {
     }
 
     try {
-      const response = await fetch('http://10.4.56.61:8081/api/auth/login', {
+      const response = await fetch('http://localhost:8081/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,23 +60,23 @@ const SignInCard: React.FC<SignInCardProps> = ({ onRegisterClick }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    <div className="sign-up-card"> 
       <h2>Авторизация:</h2>
       <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder={formSubmitted && !email.trim() ? 'Поле не может быть пустым' : 'Введите вашу почту'}
-        style={{ borderColor: formSubmitted && !email.trim() ? 'red' : 'initial' }}
+        className={formSubmitted && !email.trim() ? 'input-error' : ''}
       />
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder={formSubmitted && !password.trim() ? 'Поле не может быть пустым' : 'Введите ваш пароль'}
-        style={{ borderColor: formSubmitted && !password.trim() ? 'red' : 'initial' }}
+        className={formSubmitted && !password.trim() ? 'input-error' : ''}
       />
-      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Сообщение об ошибке */}
+      {error && <p className="error-message">{error}</p>}
       {isLoading ? (
         <p>Загрузка...</p>
       ) : (

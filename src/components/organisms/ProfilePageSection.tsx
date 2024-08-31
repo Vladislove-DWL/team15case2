@@ -1,25 +1,14 @@
-import React from 'react';
 import ProfileButton from '../atoms/ProfileButton';
 import Search from '../atoms/Search';
+import '../../index.css'
 
 const ProfilePageSection: React.FC = () => {
   return (
-    <div style={styles.container}>
+    <div className="profile-page-section">
       <ProfileButton />
       <Search />
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    padding: '20px',
-    backgroundColor: 'black',
-  },
 };
 
 export default ProfilePageSection;

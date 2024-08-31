@@ -55,7 +55,7 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 80px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -86,106 +86,382 @@ button:focus-visible {
   }
 }
 
-/* ТУТ ДЛЯ СОФТОВ */
-.user-soft-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+/*ProfileButton */
+.profile-button {
+  height: 80px;
+  width: 180px;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #000000;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: white;
 }
 
-.user-profile {
+.profile-button:hover {
+  border-color: #646cff;
+}
+
+.profile-button:focus,
+.profile-button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/*Search */
+.search-container {
+  position: relative;
+  width: 300px;
+  margin-right: 40px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  height: 70px;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: #cbcbcb; /* Можете изменить цвет фона по необходимости */
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  list-style-type: none;
+  margin: 0;
+  padding: 8px 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdown-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.no-results {
+  padding: 8px 16px;
+  cursor: default;
+  color: #999;
   text-align: center;
+}
+
+/* SoftLegend */
+.soft-legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background-color: #E0E8F9;
+    border-radius: 8px;
+}
+
+.legend-item {
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.legend-item:last-child {
+    margin-right: 0; /* Убираем отступ у последнего элемента */
+}
+
+.legend-circle {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    margin-right: 8px; /* Отступ справа от круга */
+}
+
+.blue-circle {
+    background-color: #3F6EB0;
+}
+
+.green-circle {
+    background-color: #4BFF7A;
+}
+
+.orange-circle {
+    background-color: #FFA41B;
+}
+
+/* DefaultHeader */
+.default-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px; 
+}
+
+/* ProfileHeader */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background-color: #f0f0f0; 
+}
+
+.text-container {
+  flex: 1; 
+}
+
+.header-text {
+  font-size: 70px;
+  font-weight: bold;
+  margin: 0; 
+}
+
+.image-container {
+  flex-shrink: 0; 
+  margin-left: 20px; 
+}
+
+.header-image {
+  max-width: 100%; 
+  height: auto; 
+}
+
+/* ProfilePageSection */
+
+.profile-page-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background-color: black;
+}
+
+/* SignUpCard */
+.sign-up-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+}
+
+.input-error {
+  border-color: red; 
+}
+
+.error-message {
+  color: red; 
+}
+
+.sign-up-card input {
+  height: 40px; 
+  font-size: 1.5rem; 
+  padding: 8px; 
+  border-radius: 4px; 
+  border: 1px solid #ccc; 
+}
+
+.sign-up-card button {
+  padding: 10px; 
+  background-color: #1a73e8; 
+  color: white; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
+}
+
+.sign-up-card button:hover {
+  background-color: #155bb5; 
+}
+
+/* SignUpCard */
+.sign-up-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+}
+
+.sign-up-card input {
+  height: 40px;
+  font-size: 1.5rem;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.sign-up-card button {
+  padding: 10px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sign-up-card button:hover {
+  background-color: #155bb5;
+}
+
+/* SoftHeader */
+
+.soft-header {
+  padding: 10px;
+}
+
+.soft-header__text {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* UserHardCard */
+.user-hard-card {
+  background: #00A4DC;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px;
+  color: white;
+}
+
+.user-hard-card h1 {
+  margin-bottom: 15px;
+}
+
+.user-hard-card h2 {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.user-hard-card button {
+  background: white;
+  color: #000000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.user-hard-card button:hover {
+  background: #ffffff;
+  color: #008bb3;
+  transition: 0.3s ease;
+}
+
+/* UserInfoCard */
+.user-info-card {
+  background: #00A4DC;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px;
+  color: white;
+}
+
+.user-info-card h1 {
+  margin-bottom: 15px;
+}
+
+.user-info-card .user-info-details {
   margin-bottom: 20px;
 }
 
-.user-photo {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+.user-info-card .user-info-details h2 span {
+  color: black;
 }
 
-
-.skill-category {
-  flex: 1;
-  margin: 0 10px;
+.user-info-card .error {
+  color: red;
 }
 
-.skill-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
-  background-color: rgb(255, 255, 255);
-  margin: 1rem;
-  color: rgb(0, 0, 0);
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-.skill-level {
-  background-color: blue;
-  color: white;
-  border-radius: 50%;
-  padding: 5px;
-  width: 20px;
-  height: 20px;
-  text-align: center;
-}
-
-/* UserSoftPage.css */
-.skills-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 равные колонки */
-  gap: 20px; /* Расстояние между колонками */
-}
-
-.skill-category {
-  background-color: rgb(224, 219, 219); /* Опционально: стили для категории */
-  padding: 10px;
+.user-info-card button {
+  margin-top: 10px;
+  background: white;
+  color: #00A4DC;
+  padding: 10px 20px;
+  border: none;
   border-radius: 5px;
-}
-
-/* SkillItem.css */
-.skill-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.skill-name {
-  flex-grow: 1;
-  margin-right: 20px;
-}
-
-.skill-ratings {
-  display: flex;
-  gap: 10px;
-}
-
-.circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #007bff;
-  color: white;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 1rem;
 }
 
-.circleOther {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #1da328;
+.user-info-card button:hover {
+  background: #ffffff;
+  color: #008bb3;
+  transition: 0.3s ease;
+}
+
+/* UserSoftCard */
+.user-soft-card {
+  background: #00A4DC;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px;
   color: white;
-  cursor: pointer;
-  font-weight: bold;
 }
 
+.user-soft-card h1 {
+  margin-bottom: 15px;
+}
+
+.user-soft-card h2 {
+  margin-bottom: 20px;
+}
+
+.user-soft-card button {
+  margin-top: 10px;
+  background: white;
+  color: #00A4DC;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.user-soft-card button:hover {
+  background: #ffffff;
+  color: #008bb3;
+  transition: 0.3s ease;
+}
+
+/* NotFoundPage */
+.not-found-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.not-found-image {
+  max-width: 100%; 
+  height: auto;
+}
+
+.not-found-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #00A4DC; 
+  color: white; 
+  text-decoration: none; 
+  border-radius: 5px; 
+}
+
+.not-found-link:hover {
+  background-color: #008bb3;
+  transition: background-color 0.3s ease; 
+}
